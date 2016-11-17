@@ -79,6 +79,9 @@ Status SequenceBuilder::AppendDouble(double data) {
 
 #define DEF_TENSOR_APPEND(NAME, TYPE, TAG)                                             \
   Status SequenceBuilder::AppendTensor(const std::vector<int64_t>& dims, TYPE* data) { \
+    if (TAG == -1) {                                                                   \
+      NAME.Start();                                                                    \
+    }                                                                                  \
     UPDATE(NAME.length(), TAG);                                                        \
     return NAME.Append(dims, data);                                                    \
   }
